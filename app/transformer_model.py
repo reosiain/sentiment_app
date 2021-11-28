@@ -1,11 +1,9 @@
 import torch
 import transformers
 
-import app.config as params
-
-MAX_LEN = params.token_max_len
-pretrained_model = params.sentiment_model
-tokenizer_model = params.tokenizer_model
+MAX_LEN = 100
+pretrained_model = "source/models/labse"
+tokenizer_model = "cointegrated/LaBSE-en-ru"
 
 config = transformers.AutoConfig.from_pretrained(
     pretrained_model, num_labels=3, local_files_only=True
@@ -13,7 +11,7 @@ config = transformers.AutoConfig.from_pretrained(
 xlm_model = transformers.AutoModelForSequenceClassification.from_pretrained(
     pretrained_model, config=config
 )
-tokenizer = transformers.AutoTokenizer.from_pretrained(params.tokenizer_model)
+tokenizer = transformers.AutoTokenizer.from_pretrained(tokenizer_model)
 
 
 def predict(text: str) -> int:
@@ -38,7 +36,7 @@ def predict(text: str) -> int:
     counts = {str(i): sentiments.count(i) for i in range(0, 3)}
     counts = dict(sorted(counts.items(), key=lambda item: item[1]))
 
-    #most = counts[list(counts.keys())[-1]]
+    most = counts[list(counts.keys())[-1]]
     most_label = list(counts.keys())[-1]
     # TODO label choice if equal
 

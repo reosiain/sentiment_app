@@ -11,25 +11,25 @@ class Item(BaseModel):
     text: str
 
 
-@app.post("/sentiment/predict_many/")
+@app.post("/sentiment/predict_many")
 def model_predict(item: Item):
     res = tm.predict(item.text)
     return {"sentiment": res}
 
 
-@app.post("/sentiment/predict_one/")
+@app.post("/sentiment/predict_one")
 def model_predict_one(item: Item):
     res = tm.predict_one(item.text)
     return {"sentiment": res}
 
 
-@app.post("/sentiment/weighted_embedding/")
+@app.post("/sentiment/weighted_embedding")
 def sw_emb(item: Item):
     res = sm.sentiment_weighted_text_embedding(item.text)
-    return {"sentiment": list(res)}
+    return {"emb": list(res)}
 
 
-@app.post("/sentiment/average_embedding/")
+@app.post("/sentiment/average_embedding")
 def av_emb(item: Item):
     res = sm.averaged_text_embedding(item.text)
-    return {"sentiment": list(res)}
+    return {"emb": list(res)}
