@@ -33,3 +33,9 @@ def sw_emb(item: Item):
 def av_emb(item: Item):
     res = sm.averaged_text_embedding(item.text)
     return {"emb": list(res)}
+
+@app.post("/sentiment/get_embedding")
+def av_emb(item: Item):
+    res = sm._get_embedding(item.text)
+    return {"emb": list(res)}
+

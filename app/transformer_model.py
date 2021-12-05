@@ -2,7 +2,7 @@ import torch
 import transformers
 
 MAX_LEN = 100
-pretrained_model = "source/models/labse"
+pretrained_model = "source/lm_model"
 tokenizer_model = "cointegrated/LaBSE-en-ru"
 
 config = transformers.AutoConfig.from_pretrained(

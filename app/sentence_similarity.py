@@ -12,7 +12,7 @@ import app.config as params
 MAX_LEN = params.token_max_len
 
 
-def _get_embedding(text, model, tokenizer):
+def _get_embedding(text, model=tm.xlm_model, tokenizer=tm.tokenizer):
     """Push input IDs through model. Stack and sum `layers` (last four by default).
     Select only those subword token outputs that belong to our word of interest
     and average them."""
